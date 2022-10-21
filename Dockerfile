@@ -14,5 +14,4 @@ RUN pip3 install tidal-dl --upgrade
 
 VOLUME ["/dl"]
 VOLUME ["/config"]
-CMD ["/bin/sh", "/bin/start.sh"]
-ENTRYPOINT ["/"]
+CMD ["bash"]
