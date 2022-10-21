@@ -8,9 +8,6 @@ RUN apt update && apt -y install \
     python3 \
     python3-pip
 
-# Copy necessary files into container
-COPY copy-files/ ./copy-files/
-
 # Install Tidal-dl:
 RUN pip3 install tidal-dl --upgrade
 
