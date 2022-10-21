@@ -5,7 +5,7 @@ steps:
 - name: docker  
   image: plugins/docker
   settings:
-    repo: patrickstigler/tidal-dl-docker
+    repo: patrickstigler/tidal-dl-cli
     username:
       from_secret: docker_username
     password:

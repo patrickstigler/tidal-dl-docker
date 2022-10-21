@@ -12,7 +12,7 @@ RUN apt update && apt -y install \
 RUN pip3 install tidal-dl --upgrade
 
 
-EXPOSE 80
 VOLUME ["/dl"]
 VOLUME ["/config"]
 CMD ["/bin/sh", "/bin/start.sh"]
+ENTRYPOINT ["/"]
