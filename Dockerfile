@@ -7,7 +7,7 @@ RUN pip install -U \
     wheel
 	
 ENV CONFIG_DIR=/tidal-dl
-ENV DL_DIR=/download
+ENV DL_DIR=/music
 ENV USER="tidal"
 ENV UID=99
 ENV GID=100
