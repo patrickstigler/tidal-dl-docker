@@ -1,6 +1,9 @@
 FROM python:3.9.4-buster
-WORKDIR /home/tidaluser
+RUN mkdir /home/tidal
+WORKDIR /home/tidal
+
 COPY . .
+RUN export HOME=/home/tidal
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install tidal-dl --upgrade
 EXPOSE 80
