@@ -17,6 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 RUN chown -R user:user /home/user/
+RUN mkdir /download
+RUN chown -R user:user /download
 
 USER user
 
