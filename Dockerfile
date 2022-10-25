@@ -1,6 +1,9 @@
 FROM python:3.9.4-buster
-RUN mkdir tidal-dl
-WORKDIR /tidal-dl
+RUN useradd -ms /bin/bash activeuser
+USER activeuser
+WORKDIR /home/activeuser
+RUN mkdir /home/activeuser/tidal-dl
+WORKDIR /home/activeuser/tidal-dl
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install tidal-dl --upgrade
