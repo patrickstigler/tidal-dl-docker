@@ -1,13 +1,13 @@
 FROM python:3.9.4-buster
 RUN mkdir /home/tidal
-RUN chmod +rwx /home/tidal
 WORKDIR /home/tidal
 
 RUN useradd -m -r user && \
-    chown user /home/tidal
+    chown -R user /home/tidal
+RUN export HOME=/home/tidal
 
 COPY . .
-RUN export HOME=/home/tidal
+RUN chmod +x /home/tidal/app/main.py
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install tidal-dl --upgrade
 
