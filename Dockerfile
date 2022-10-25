@@ -18,10 +18,8 @@ WORKDIR \
 RUN mkdir $CONFIG_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
 	chown -R $USER $CONFIG_DIR && \
-	ulimit -n 2048
-
-
-RUN	chmod -R 770 $DL_DIR && \
+	ulimit -n 2048 && \
+	chmod -R 770 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
 WORKDIR $CONFIG_DIR
