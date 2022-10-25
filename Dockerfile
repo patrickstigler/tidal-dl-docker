@@ -7,13 +7,14 @@ RUN pip install -U \
     wheel
 	
 ENV CONFIG_DIR=/tidal-dl
-ENV DL_DIR=/music
+ENV DL_DIR=/tidal-dl/music
 ENV USER="tidal"
 ENV UID=99
 ENV GID=100
 ENV DATA_PERM=770
 
 RUN mkdir $CONFIG_DIR && \
+	mkdir $DL_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
 	chown -R $USER $CONFIG_DIR && \
 	ulimit -n 2048 && \
