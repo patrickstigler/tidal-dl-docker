@@ -6,8 +6,8 @@ RUN pip install -U \
     setuptools \
     wheel
 	
-ENV CONFIG_DIR=/tidal-dl/config
-ENV DL_DIR=/tidal-dl/download
+ENV CONFIG_DIR=/tidal-dl
+ENV DL_DIR=/download
 ENV USER="tidal"
 ENV UID=99
 ENV GID=100
@@ -22,7 +22,7 @@ RUN mkdir $CONFIG_DIR && \
 RUN	chmod -R 770 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
-WORKDIR /tidal-dl
+WORKDIR $CONFIG_DIR
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
