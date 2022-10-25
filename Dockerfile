@@ -5,23 +5,31 @@ RUN pip install -U \
     pip \
     setuptools \
     wheel
+	
+ENV CONFIG_DIR=/tidal-dl/config
+ENV DL_DIR=/tidal-dl/download
+ENV USER="tidal"
+ENV UID=99
+ENV GID=100
+ENV DATA_PERM=770
 
-WORKDIR /project
+RUN mkdir $CONFIG_DIR && \
+	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
+	chown -R $USER $CONFIG_DIR && \
+	ulimit -n 2048
 
-RUN useradd -m -r user && \
-    chown user /project
+
+RUN	chmod -R 770 $DL_DIR && \
+	chown -R $UID:$GID $DL_DIR
+
+WORKDIR /tidal-dl
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV UMASK=0000
-ENV UID=99
-ENV GID=100
+EXPOSE 8080
 
-RUN chown -R ${UID}:${GID} /home/user/
-RUN mkdir /download
-RUN chown -R user /download
 USER user
 CMD python -m uvicorn main:app --host 0.0.0.0 --port 80
