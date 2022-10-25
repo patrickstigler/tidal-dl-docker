@@ -3,7 +3,6 @@ RUN useradd -ms /bin/bash tidaluser
 USER tidaluser
 WORKDIR /home/tidaluser
 COPY . .
-WORKDIR /home/tidaluser/app
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip3 install tidal-dl --upgrade
 EXPOSE 80
