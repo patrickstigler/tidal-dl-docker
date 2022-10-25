@@ -13,6 +13,8 @@ ENV UID=99
 ENV GID=100
 ENV DATA_PERM=770
 
+WORKDIR \
+
 RUN mkdir $CONFIG_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
 	chown -R $USER $CONFIG_DIR && \
