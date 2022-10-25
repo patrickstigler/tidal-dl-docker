@@ -1,5 +1,6 @@
 FROM python:3.9.4-buster
 RUN mkdir /home/tidal
+RUN chmod +rwx /home/tidal
 WORKDIR /home/tidal
 
 RUN useradd -m -r user && \
