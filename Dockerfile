@@ -5,7 +5,8 @@ RUN pip install -U \
     pip \
     setuptools \
     wheel
-	
+
+ENV APP_DIR=/tidal-dl	
 ENV CONFIG_DIR=/tidal-dl/config
 ENV DL_DIR=/tidal-dl/music
 ENV USER="tidal"
@@ -16,13 +17,13 @@ ENV DATA_PERM=770
 WORKDIR /
 
 RUN mkdir -p $CONFIG_DIR && \
-	mkdir - p $DL_DIR && \
+	mkdir -p $DL_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
 	chown -R $USER $CONFIG_DIR && \
 	chmod -R 777 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
-WORKDIR $CONFIG_DIR
+WORKDIR $APP_DIR
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
