@@ -6,7 +6,7 @@ RUN pip install -U \
     setuptools \
     wheel
 	
-ENV CONFIG_DIR=/tidal-dl
+ENV CONFIG_DIR=/tidal-dl/config
 ENV DL_DIR=/tidal-dl/music
 ENV USER="tidal"
 ENV UID=99
@@ -15,11 +15,11 @@ ENV DATA_PERM=770
 
 WORKDIR /
 
-RUN mkdir $CONFIG_DIR && \
+RUN mkdir -p $CONFIG_DIR && \
 	mkdir - p $DL_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
 	chown -R $USER $CONFIG_DIR && \
-	chmod -R 770 $DL_DIR && \
+	chmod -R 777 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
 WORKDIR $CONFIG_DIR
