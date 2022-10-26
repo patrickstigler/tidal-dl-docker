@@ -19,10 +19,11 @@ WORKDIR /
 RUN mkdir -p $CONFIG_DIR && \
 	mkdir -p $DL_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
-	chown -R $USER $CONFIG_DIR && \
 	chmod -R 777 $CONFIG_DIR && \
-	chown -R $UID:$GID $DL_DIR && \
-	chmod -R 777 $DL_DIR
+	chown -R $USER $CONFIG_DIR && \
+	chmod -R 777 $DL_DIR && \
+	chown -R $UID:$GID $DL_DIR
+
 
 WORKDIR $APP_DIR
 
