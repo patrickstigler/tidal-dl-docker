@@ -7,8 +7,6 @@ RUN pip install -U \
     wheel
 	
 ENV DATA_DIR=/tidal-dl	
-ENV CONFIG_DIR=/tidal-dl/config
-ENV DL_DIR=/tidal-dl/download
 
 ENV UMASK=000
 ENV UID=99
@@ -19,13 +17,11 @@ EXPOSE 80
 
 WORKDIR /
 
-RUN mkdir -p $CONFIG_DIR && \
-	mkdir -p $DL_DIR && \
-	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
-	chmod -R 770 $CONFIG_DIR && \
-	chown -R $USER $CONFIG_DIR && \
-	chmod -R 770 $DL_DIR && \
-	chown -R $UID:$GID $DL_DIR
+RUN mkdir -p $DATA_DIR && \
+	useradd -d $DATA_DIR -s /bin/bash $USER && \
+	chmod -R 770 $DATA_DIR && \
+	chown -R $USER $DATA_DIR && \
+	chown -R $UID:$GID $DATA_DIR
 
 COPY /scripts/start.sh /opt/scripts/start.sh
 RUN chmod -R 770 /opt/scripts/
