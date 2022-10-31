@@ -8,7 +8,7 @@ RUN pip install -U \
 	
 ENV DATA_DIR=/tidal-dl	
 ENV CONFIG_DIR=/tidal-dl/config
-ENV DL_DIR=/tidal-dl/music
+ENV DL_DIR=/tidal-dl/download
 
 ENV UMASK=000
 ENV UID=99
