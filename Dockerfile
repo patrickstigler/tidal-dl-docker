@@ -5,14 +5,16 @@ RUN pip install -U \
     pip \
     setuptools \
     wheel
-
-ENV APP_DIR=/tidal-dl	
+	
+ENV DATA_DIR=/tidal-dl	
 ENV CONFIG_DIR=/tidal-dl/config
 ENV DL_DIR=/tidal-dl/music
-ENV USER="tidal"
+
+ENV UMASK=000
 ENV UID=99
 ENV GID=100
 ENV DATA_PERM=770
+ENV USER="tidal"
 
 WORKDIR /
 
@@ -24,8 +26,10 @@ RUN mkdir -p $CONFIG_DIR && \
 	chmod -R 777 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
+ADD /scripts/ /opt/scripts/
+RUN chmod -R 770 /opt/scripts/
 
-WORKDIR $APP_DIR
+WORKDIR $DATA_DIR
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
@@ -35,4 +39,4 @@ COPY . .
 EXPOSE 8080
 
 USER $USER
-CMD python -m uvicorn main:app --host 0.0.0.0 --port 80
+ENTRYPOINT ["/opt/scripts/start.sh"]
