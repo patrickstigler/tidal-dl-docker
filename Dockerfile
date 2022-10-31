@@ -15,18 +15,19 @@ ENV UID=99
 ENV GID=100
 ENV DATA_PERM=770
 ENV USER="tidal"
+EXPOSE 8080
 
 WORKDIR /
 
 RUN mkdir -p $CONFIG_DIR && \
 	mkdir -p $DL_DIR && \
 	useradd -d $CONFIG_DIR -s /bin/bash $USER && \
-	chmod -R 777 $CONFIG_DIR && \
+	chmod -R 770 $CONFIG_DIR && \
 	chown -R $USER $CONFIG_DIR && \
-	chmod -R 777 $DL_DIR && \
+	chmod -R 770 $DL_DIR && \
 	chown -R $UID:$GID $DL_DIR
 
-ADD /scripts/ /opt/scripts/
+COPY /scripts/start.sh /opt/scripts/start.sh
 RUN chmod -R 770 /opt/scripts/
 
 WORKDIR $DATA_DIR
@@ -36,7 +37,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 8080
-
-USER $USER
 ENTRYPOINT ["/opt/scripts/start.sh"]
