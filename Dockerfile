@@ -15,7 +15,7 @@ ENV UID=99
 ENV GID=100
 ENV DATA_PERM=770
 ENV USER="tidal"
-EXPOSE 8080
+EXPOSE 80
 
 WORKDIR /
 
@@ -37,4 +37,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+USER $USER
 ENTRYPOINT ["/opt/scripts/start.sh"]
