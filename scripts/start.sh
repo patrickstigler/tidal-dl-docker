@@ -13,4 +13,4 @@ chmod -R 750 /opt/scripts
 chown -R ${UID}:${GID} ${DATA_DIR}
 
 echo "---Start program---"
-su ${USER} -c "python -m uvicorn main:app --host 0.0.0.0 --port 80" &
+su ${USER} -c "python -m uvicorn main:app --host 0.0.0.0 --port 80"
